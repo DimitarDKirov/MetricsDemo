@@ -10,9 +10,8 @@ namespace MetricsDemo
     {
         public static CounterOptions CounterOptions = new CounterOptions
         {
-            Name = "requests",
-            MeasurementUnit = Unit.Calls,
-            ResetOnReporting = true
+            Name = "requests_count",
+            MeasurementUnit = Unit.Calls
         };
 
         public static MeterOptions RequestMeter = new MeterOptions
@@ -26,7 +25,6 @@ namespace MetricsDemo
             Name = "requests_timer",
             MeasurementUnit = Unit.Requests,
             DurationUnit = TimeUnit.Milliseconds,
-            RateUnit = TimeUnit.Milliseconds,
         };
 
         public static readonly GaugeOptions PhysicalMemory = new GaugeOptions

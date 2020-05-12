@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,6 @@ namespace MetricsDemo
             services.AddMetrics();
             services.AddSwaggerGen(n =>
                 n.SwaggerDoc("v1", new OpenApiInfo {Title = "MetricsDemo", Version = "v1"}));
-            services.AddHostedService<ProcessMemory>();
             services.AddMvc();
         }
 
@@ -28,7 +28,10 @@ namespace MetricsDemo
         {
             app.UseSwagger();
             app.UseSwaggerUI(n =>
-                n.SwaggerEndpoint("v1/swagger.json", "Metrics Demo V1"));
+            {
+                n.SwaggerEndpoint("/swagger/v1/swagger.json", "Metrics Demo V1");
+                n.RoutePrefix= String.Empty;
+            });
             app.UseRouting();
             app.ConfigureExceptionMiddleware();
             app.UseEndpoints(endpoints =>

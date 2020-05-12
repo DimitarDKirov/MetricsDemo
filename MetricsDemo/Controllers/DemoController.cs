@@ -20,10 +20,10 @@ namespace MetricsDemo.Controllers
             _metrics = metrics ?? throw new ArgumentNullException(nameof(metrics));
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<string> TestGetWithRandomDelay()
         {
-            var delay = Random.Next(1000, 60000);
+            var delay = Random.Next(1000, 10000);
             using (_metrics.Measure.Timer.Time(MetricsRegistry.RequestTimer, new MetricTags("req", "RandomDelay")))
             {
                 await Task.Delay(delay);
@@ -43,11 +43,19 @@ namespace MetricsDemo.Controllers
             return "OK";
         }
 
-        [HttpGet("withTag")]
-        public async Task<string> Increment(string tag)
+        [HttpPost]
+        public async Task<string> Create(string tag)
         {
             var tags = new MetricTags("ctag", string.IsNullOrEmpty(tag) ? "Unknown" : tag);
             _metrics.Measure.Counter.Increment(MetricsRegistry.CounterOptions, tags);
+            return "OK";
+        }
+
+        [HttpDelete]
+        public async Task<string> Remove(string tag)
+        {
+            var tags = new MetricTags("ctag", string.IsNullOrEmpty(tag) ? "Unknown" : tag);
+            _metrics.Measure.Counter.Decrement(MetricsRegistry.CounterOptions, tags);
             return "OK";
         }
 
