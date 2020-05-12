@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,10 +22,10 @@ namespace MetricsDemo.Controllers
         }
 
         [HttpGet]
-        public async Task<string> TestGetWithRandomDelay()
+        public async Task<string> Delay()
         {
-            var delay = Random.Next(1000, 10000);
-            using (_metrics.Measure.Timer.Time(MetricsRegistry.RequestTimer, new MetricTags("req", "RandomDelay")))
+            var delay = Random.Next(1000, 5000);
+            using (_metrics.Measure.Timer.Time(MetricsRegistry.RequestTimer))
             {
                 await Task.Delay(delay);
             }
@@ -32,30 +33,17 @@ namespace MetricsDemo.Controllers
             return delay.ToString();
         }
 
-        [HttpGet("withDelay")]
-        public async Task<string> Get(int delay)
-        {
-            using (_metrics.Measure.Timer.Time(MetricsRegistry.RequestTimer, new MetricTags("req", "ParamDelay")))
-            {
-                await Task.Delay(delay);
-            }
-
-            return "OK";
-        }
-
         [HttpPost]
-        public async Task<string> Create(string tag)
+        public async Task<string> Create()
         {
-            var tags = new MetricTags("ctag", string.IsNullOrEmpty(tag) ? "Unknown" : tag);
-            _metrics.Measure.Counter.Increment(MetricsRegistry.CounterOptions, tags);
+            _metrics.Measure.Counter.Increment(MetricsRegistry.CounterOptions);
             return "OK";
         }
 
         [HttpDelete]
-        public async Task<string> Remove(string tag)
+        public async Task<string> Remove()
         {
-            var tags = new MetricTags("ctag", string.IsNullOrEmpty(tag) ? "Unknown" : tag);
-            _metrics.Measure.Counter.Decrement(MetricsRegistry.CounterOptions, tags);
+            _metrics.Measure.Counter.Decrement(MetricsRegistry.CounterOptions);
             return "OK";
         }
 

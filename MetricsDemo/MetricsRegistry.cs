@@ -1,6 +1,5 @@
 ﻿using App.Metrics;
 using App.Metrics.Counter;
-using App.Metrics.Gauge;
 using App.Metrics.Meter;
 using App.Metrics.Timer;
 
@@ -14,23 +13,11 @@ namespace MetricsDemo
             MeasurementUnit = Unit.Calls
         };
 
-        public static MeterOptions RequestMeter = new MeterOptions
-        {
-            Name = "requests_throughput",
-            MeasurementUnit = Unit.Calls,
-        };
-
         public static TimerOptions RequestTimer = new TimerOptions
         {
             Name = "requests_timer",
             MeasurementUnit = Unit.Requests,
             DurationUnit = TimeUnit.Milliseconds,
-        };
-
-        public static readonly GaugeOptions PhysicalMemory = new GaugeOptions
-        {
-            Name = "physical_memory",
-            MeasurementUnit = Unit.Bytes
         };
 
         public static readonly MeterOptions Exceptions = new MeterOptions

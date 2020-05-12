@@ -25,7 +25,7 @@ namespace MetricsDemo
                             options =>
                             {
                                 options.InfluxDb.BaseUri = new Uri("http://127.0.0.1:8086");
-                                options.InfluxDb.Database = "test1";
+                                options.InfluxDb.Database = "db_demo";
                                 options.HttpPolicy.Timeout = TimeSpan.FromSeconds(10);
                                 options.InfluxDb.CreateDataBaseIfNotExists = true;
                             });
