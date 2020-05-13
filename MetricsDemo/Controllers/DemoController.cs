@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using App.Metrics;
 using App.Metrics.Counter;
@@ -25,25 +21,21 @@ namespace MetricsDemo.Controllers
         public async Task<string> Delay()
         {
             var delay = Random.Next(1000, 5000);
-            using (_metrics.Measure.Timer.Time(MetricsRegistry.RequestTimer))
-            {
-                await Task.Delay(delay);
-            }
-
+            await Task.Delay(delay);
             return delay.ToString();
         }
 
         [HttpPost]
         public async Task<string> Create()
         {
-            _metrics.Measure.Counter.Increment(MetricsRegistry.CounterOptions);
+            _metrics.Measure.Counter.Increment(new CounterOptions { Name = "requests_count", MeasurementUnit = Unit.Calls });
             return "OK";
         }
 
         [HttpDelete]
         public async Task<string> Remove()
         {
-            _metrics.Measure.Counter.Decrement(MetricsRegistry.CounterOptions);
+            _metrics.Measure.Counter.Increment(new CounterOptions { Name = "requests_count", MeasurementUnit = Unit.Calls });
             return "OK";
         }
 

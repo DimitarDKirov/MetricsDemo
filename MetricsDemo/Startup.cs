@@ -33,7 +33,6 @@ namespace MetricsDemo
                 n.RoutePrefix= String.Empty;
             });
             app.UseRouting();
-            app.ConfigureExceptionMiddleware();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
