@@ -30,6 +30,8 @@ namespace MetricsDemo
                                 options.InfluxDb.CreateDataBaseIfNotExists = true;
                             });
                     })
+                .UseKestrel()
+                .UseUrls("http://0.0.0.0:5000")
                 .UseMetrics()
                 .UseStartup<Startup>()
                 .Build();
