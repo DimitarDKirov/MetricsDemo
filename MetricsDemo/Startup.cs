@@ -18,7 +18,6 @@ namespace MetricsDemo
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMetrics();
             services.AddSwaggerGen(n =>
                 n.SwaggerDoc("v1", new OpenApiInfo {Title = "MetricsDemo", Version = "v1"}));
             services.AddMvc();
@@ -33,7 +32,6 @@ namespace MetricsDemo
                 n.RoutePrefix= String.Empty;
             });
             app.UseRouting();
-            app.ConfigureExceptionMiddleware();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
