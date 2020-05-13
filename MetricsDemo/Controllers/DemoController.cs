@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using App.Metrics;
-using App.Metrics.Counter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MetricsDemo.Controllers

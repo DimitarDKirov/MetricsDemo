@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using App.Metrics;
-using App.Metrics.Counter;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
