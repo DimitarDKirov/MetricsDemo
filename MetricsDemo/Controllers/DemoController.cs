@@ -35,7 +35,7 @@ namespace MetricsDemo.Controllers
         [HttpDelete]
         public async Task<string> Remove()
         {
-            _metrics.Measure.Counter.Increment(new CounterOptions { Name = "requests_count", MeasurementUnit = Unit.Calls });
+            _metrics.Measure.Counter.Decrement(new CounterOptions { Name = "requests_count", MeasurementUnit = Unit.Calls });
             return "OK";
         }
 
