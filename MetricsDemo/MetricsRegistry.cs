@@ -1,6 +1,5 @@
 ﻿using App.Metrics;
 using App.Metrics.Counter;
-using App.Metrics.Meter;
 using App.Metrics.Timer;
 
 namespace MetricsDemo
@@ -18,12 +17,6 @@ namespace MetricsDemo
             Name = "requests_timer",
             MeasurementUnit = Unit.Requests,
             DurationUnit = TimeUnit.Milliseconds,
-        };
-
-        public static readonly MeterOptions Exceptions = new MeterOptions
-        {
-            Name = "exceptions_thrown",
-            MeasurementUnit = Unit.Errors,
         };
     }
 }

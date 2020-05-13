@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using App.Metrics;
-using App.Metrics.Counter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MetricsDemo.Controllers
@@ -24,7 +19,7 @@ namespace MetricsDemo.Controllers
         [HttpGet]
         public async Task<string> Delay()
         {
-            var delay = Random.Next(1000, 5000);
+            var delay = Random.Next(250, 3000);
             using (_metrics.Measure.Timer.Time(MetricsRegistry.RequestTimer))
             {
                 await Task.Delay(delay);
